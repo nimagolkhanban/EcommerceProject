@@ -24,7 +24,34 @@ class User(AbstractUser):
         
             
 
-
+class Profile(models.Model):
+    
+    class GenderChoice(models.TextChoices):
+        male = "male",
+        femail = "femail",
+        other = "other"
+        
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    #the reaseon we use image field is becaus image have various amont of format
+    image = models.ImageField(upload_to="image", default="default/default-image.jpg", null=True, blank=True)
+    
+    full_name = models.CharField(max_length=100, blank=True, null= True)
+    abount = models.TextField(null=True, blank=True)
+    gender = models.CharField(choices=GenderChoice.choices, default=GenderChoice.male, max_length=6)
+    state = models.CharField(max_lrngth=50)
+    city = models.CharField(max_lrngth=50)
+    address = models.CharField(max_lrngth=500)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    #using shortuuid package
+    pid = ShortUUIDField(unique=True, length=10, max_length=20, alphabets="abcdefghijklmnopqrstuv")
+    
+    def save(self, *args, **kwargs):
+        if self.full_name == "" or self.full_name == None:
+            self.full_name = self.user.full_name
+        super(Profile, self).save(*args, **kwargs)
+    
     
     
     
