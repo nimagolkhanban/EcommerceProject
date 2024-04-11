@@ -45,7 +45,7 @@ class Profile(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     #using shortuuid package
-    pid = ShortUUIDField(unique=True, length=10, max_length=20, alphabets="abcdefghijklmnopqrstuv")
+    pid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuv")
     
     def save(self, *args, **kwargs):
         if self.full_name == "" or self.full_name == None:
