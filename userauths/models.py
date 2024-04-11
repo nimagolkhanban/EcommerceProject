@@ -4,7 +4,7 @@ from shortuuid.django_fields import ShortUUIDField
 #create my custome user model 
 class User(AbstractUser):
     username = models.CharField(max_length=100)
-    email = models.Emailfields(unique=True)
+    email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=100, blank=True, null= True)
     phone = models.CharField(max_length=100, blank=True, null= True)
     
