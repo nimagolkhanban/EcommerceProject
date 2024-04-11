@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from shortuuid.django_fields import ShortUUIDField
 #create my custome user model 
 class User(AbstractUser):
-    username = models.CharField(max_lrngth=100)
+    username = models.CharField(max_length=100)
     email = models.Emailfields(unique=True)
     full_name = models.CharField(max_length=100, blank=True, null= True)
     phone = models.CharField(max_length=100, blank=True, null= True)
@@ -39,9 +39,9 @@ class Profile(models.Model):
     full_name = models.CharField(max_length=100, blank=True, null= True)
     abount = models.TextField(null=True, blank=True)
     gender = models.CharField(choices=GenderChoice.choices, default=GenderChoice.male, max_length=6)
-    state = models.CharField(max_lrngth=50)
-    city = models.CharField(max_lrngth=50)
-    address = models.CharField(max_lrngth=500)
+    state = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    address = models.CharField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)
     
     #using shortuuid package
