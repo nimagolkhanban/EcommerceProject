@@ -133,12 +133,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
+
 STATIC_URL = 'static/'
 STATIC_DIRS = [BASE_DIR, 'static']      #for serving statc file 
 STATIC_ROOT = BASE_DIR / 'staticfiles'     #its for collect static this will show where you can collect static file
 
+
+
 MEDIA_URL = '/media/'     #for django when a user upload a media file and its not static 
 MEDIA_ROOT = BASE_DIR / 'media'    #location of a folder in root for file user upload on our db 
+
+
+AUTH_USER_MODEL = "userauths.User" #becaus we change the user model and create a custome one
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
