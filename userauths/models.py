@@ -19,9 +19,9 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         email_username , _ = self.email.split("@")
         if self.full_name == "" or self.full_name == None:
-            self.full_name = self.email
+            self.full_name = email_username
         if self.username == "" or self.username == None:
-            self.username = self.email
+            self.username = email_username
         super(User, self).save(*args, **kwargs)
         
             
@@ -53,7 +53,9 @@ class Profile(models.Model):
         if self.full_name == "" or self.full_name == None:
             self.full_name = self.user.full_name
         super(Profile, self).save(*args, **kwargs)
- 
+    
+    def __str__(self):
+        return str(self.full_name)
    
 @receiver(post_save, sender=User)    
 def create_user_profile(sender, instance, created, **kwargs):
