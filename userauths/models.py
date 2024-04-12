@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from shortuuid.django_fields import ShortUUIDField
 #create my custome user model 
 class User(AbstractUser):
@@ -51,9 +53,10 @@ class Profile(models.Model):
         if self.full_name == "" or self.full_name == None:
             self.full_name = self.user.full_name
         super(Profile, self).save(*args, **kwargs)
-    
-    
-    
-    
-    
+ 
+   
+@receiver(post_save, sender=User)    
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
     
