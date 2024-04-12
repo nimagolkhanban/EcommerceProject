@@ -9,6 +9,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
+        #the code bellow help us to add some data in our token that not visible but in jwt site its there 
         token["full_name"] = user.full_name
         token["email"] = user.email
         token["username"] = user.username
@@ -41,7 +42,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         
         email_user, _ = user.email.split("@")
-        user.set_password(validate_password["password"])
+        user.username = email_user
+        user.set_password(validated_data["password"])
         user.save()
         return user
         
