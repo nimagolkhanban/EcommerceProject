@@ -19,9 +19,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_yasg.views import get_schema_view #for swagger
+from drf_yasg import openapi #for swagger
 
+
+#start swagger setup
 schema_view = get_schema_view(
     openapi.Info(
         title="E-commerce Backend APIs",
@@ -36,13 +38,14 @@ schema_view = get_schema_view(
     permission_classes = (permissions.AllowAny,)
     
 )
+#end swagger setup before urlpatern part
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/v1/", include("api.urls")),
     
-    #descriptions
-    path("",schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger")
+    #descriptions for swagger
+    path("",schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger"),
     
     
 ]
