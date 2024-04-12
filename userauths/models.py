@@ -33,7 +33,7 @@ class Profile(models.Model):
         femail = "femail",
         other = "other"
         
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     
     #the reaseon we use image field is becaus image have various amont of format
     image = models.ImageField(upload_to="image", default="default/default-image.jpg", null=True, blank=True)
